@@ -3,11 +3,15 @@ package com.tavdev2021.recyclerviewanimation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 class CustomAdapter : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+
+
 
     val titles = arrayOf("Kotlin",
         "Python",
@@ -57,6 +61,8 @@ class CustomAdapter : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
         holder.itemTitle.text = titles[position]
         holder.itemDetail.text = details[position]
         holder.itemImage.setImageResource(images[position])
+
+        holder.cardview.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context,R.anim.item_anim))
     }
 
     override fun getItemCount(): Int {
@@ -64,14 +70,17 @@ class CustomAdapter : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
-        var itemImage : ImageView
+
         var itemTitle : TextView
         var itemDetail : TextView
+        var itemImage : ImageView
+        var cardview : CardView
 
         init {
-            itemImage = itemView.findViewById(R.id.item_image)
             itemTitle = itemView.findViewById(R.id.item_title)
             itemDetail = itemView.findViewById(R.id.item_detail)
+            itemImage = itemView.findViewById(R.id.item_image)
+            cardview = itemView.findViewById(R.id.card_view)
         }
     }
 }
